@@ -1,3 +1,5 @@
+```sql
+
 -- Krijimi i bazës së të dhënave
 CREATE DATABASE HOTEL_CHURN_ANALYSIS;
 
