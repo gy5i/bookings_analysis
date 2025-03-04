@@ -46,8 +46,6 @@ Përdora një dataset të rezervimeve të gjetur në [Kaggle](https://www.kaggle
 
 Në këtë projekt, u përdor SQL për të analizuar dataset-in, filtruar rezervimet sipas segmentit dhe gjetur modelet e anulimeve.
 
-[📎 Shiko kodin SQL këtu](https://www.notion.so/Analiza-e-Rezervimeve-City-Hotel-1ab8711563b280f08083ec7d919282c5?pvs=21)
-
 ---
 
 ## Përmbledhje Ekzekutive
@@ -67,25 +65,17 @@ Përmes analizës, u identifikuan burimet kryesore të anulimeve. Rezultatet tre
 
 - Shumica e anulimeve (pjesa më e madhe e 80%-shit të identifikuar) vijnë nga klientët nga Portugalia.
 
-![Screenshot 2025-03-04 115453.png](attachment:72d4331e-8e26-443b-b9ea-2daf643aa12c:ae071eaa-44ce-4ad3-91e6-9463f7e18f60.png)
-
 **Lloji i depozitës dhe shkalla e anulimeve:**
 
 - Rezervimet me depozitë jo të rimbursueshme kanë pothuajse 100% shkallë anulimi.
-
-![Screenshot 2025-03-04 115718.png](attachment:3c4ea0f2-fddb-46ca-9eae-9887d5badb19:Screenshot_2025-03-04_115718.png)
 
 **Koha e udhëheqjes dhe anulimet:**
 
 - Sa më i lartë të jetë "lead time" (koha nga rezervimi deri në datën e qëndrimit), aq më e lartë është mundësia e anulimit.
 
-![Screenshot 2025-03-04 115749.png](attachment:76e642a1-9c8c-4a1a-b1bc-a045d7a144f9:Screenshot_2025-03-04_115749.png)
-
 **Segmenti i tregut dhe anulimet:**
 
 - Segmenti "Groups" ka shkallën më të lartë të anulimeve, por segmenti "Online TA" ka më shumë anulime për shkak të volumit më të madh të rezervimeve.
-    
-    ![Screenshot 2025-03-04 115811.png](attachment:ba5e0e52-4b51-4a92-8b8b-9e92d9d540da:Screenshot_2025-03-04_115811.png)
     
 
 ---
