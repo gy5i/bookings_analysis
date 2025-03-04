@@ -1,3 +1,5 @@
+```sql
+
 -- Krijimi i bazës së të dhënave
 CREATE DATABASE HOTEL_CHURN_ANALYSIS;
 
@@ -72,3 +74,5 @@ SELECT market_segment,
 FROM bookings
 GROUP BY market_segment
 ORDER BY Cancellation_Rate_Percentage DESC;
+
+sql```
