@@ -1,0 +1,74 @@
+-- Krijimi i bazës së të dhënave
+CREATE DATABASE HOTEL_CHURN_ANALYSIS;
+
+-- Shfaqja e të gjitha të dhënave nga tabela bookings
+SELECT * FROM bookings;
+
+-- Norma e anulimit
+CREATE VIEW cancelation AS
+SELECT 
+    COUNT(*) AS Total_Bookings,
+    SUM(CASE WHEN is_canceled = 'YES' THEN 1 ELSE 0 END) AS Total_Canceled,
+    ROUND((CAST(SUM(CASE WHEN is_canceled = 'YES' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*)) * 100, 2) AS Cancellation_Rate_Percentage
+FROM bookings;
+
+-- Anulime sipas lead_time
+SELECT 
+    CASE 
+        WHEN lead_time <= 7 THEN '0-7 days'
+        WHEN lead_time <= 14 THEN '8-14 days'
+        WHEN lead_time <= 21 THEN '15-21 days'
+        WHEN lead_time <= 30 THEN '22-30 days'
+        WHEN lead_time <= 60 THEN '31-60 days'
+        WHEN lead_time <= 90 THEN '61-90 days'
+        ELSE '90+ days'
+    END AS Lead_Time_Range,
+    COUNT(*) AS Total_Bookings,
+    COUNT(CASE WHEN is_canceled = 'YES' THEN 1 END) AS Total_Canceled,
+    ROUND((CAST(COUNT(CASE WHEN is_canceled = 'YES' THEN 1 END) AS FLOAT) / COUNT(*)) * 100, 2) AS Cancellation_Rate_Percentage
+FROM bookings
+GROUP BY Lead_Time_Range
+ORDER BY Cancellation_Rate_Percentage DESC;
+
+-- Anulime sipas tipit të depozitës
+SELECT deposit_type, 
+    COUNT(*) AS Total_Bookings, 
+    COUNT(CASE WHEN is_canceled = 'YES' THEN 1 END) AS Total_Canceled,
+FROM bookings
+GROUP BY deposit_type
+ORDER BY Cancellation_Rate_Percentage DESC;
+
+-- Anulime sipas Shteteve
+SELECT country, 
+    COUNT(*) AS Total_Bookings, 
+    COUNT(CASE WHEN is_canceled = 'YES' THEN 1 END) AS Total_Canceled,
+FROM bookings 
+GROUP BY country
+ORDER BY Total_Bookings DESC;
+
+-- Krijimi i një VIEW për anulimet sipas segmentit të tregut
+CREATE VIEW market_segment AS
+SELECT market_segment, 
+    COUNT(*) AS Total_Bookings, 
+    COUNT(CASE WHEN is_canceled = 'YES' THEN 1 END) AS Total_Canceled, 
+FROM bookings 
+GROUP BY market_segment
+ORDER BY Cancellation_Rate_Percentage DESC;
+
+-- Kanali i distribucionit dhe normat e anulimit
+SELECT distribution_channel, 
+    COUNT(*) AS Total_Bookings,
+    SUM(CASE WHEN is_canceled = 'YES' THEN 1 ELSE 0 END) AS Total_Canceled,
+    ROUND((CAST(SUM(CASE WHEN is_canceled = 'YES' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*)) * 100, 2) AS Cancellation_Rate_Percentage
+FROM bookings
+GROUP BY distribution_channel
+ORDER BY Cancellation_Rate_Percentage DESC;
+
+-- Segmenti i tregut dhe normat e anulimit
+SELECT market_segment, 
+    COUNT(*) AS Total_Bookings,
+    SUM(CASE WHEN is_canceled = 'YES' THEN 1 ELSE 0 END) AS Total_Canceled,
+    ROUND((CAST(SUM(CASE WHEN is_canceled = 'YES' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*)) * 100, 2) AS Cancellation_Rate_Percentage
+FROM bookings
+GROUP BY market_segment
+ORDER BY Cancellation_Rate_Percentage DESC;
